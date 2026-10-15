@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark" data-mood="energetic">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xudoyqulov.dev | Shaxsiy Portfolio — Full-Stack Dasturchi & kiberxavfsizlik bo'yicha mutaxassis</title>
+
+    <!-- SEO & Metadata -->
+    <meta name="description"
+        content="xudoyqulov.dev — Zamonaviy, xavfsiz va yuqori samaradorlikka ega veb-ilovalar yaratuvchi Full-Stack dasturchi va kiberxavfsizlik bo'yicha mutaxassisining rasmiy portfoliyasi.">
+    <meta name="keywords"
+        content="xudoyqulov.dev, Avazbek Xudoyqulov, Xudoyqulov, Portfolio, Full-Stack dasturchi, Frontend, Backend, JavaScript, React, Node.js, Web dasturchi, O'zbekiston dasturchi">
+    <meta name="author" content="Avazbek Xudoyqulov (xudoyqulov.dev)">
+
+    <!-- Security & Protection -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="xudoyqulov.dev | Shaxsiy Portfolio">
+    <meta property="og:description"
+        content="Zamonaviy, xavfsiz va yuqori samaradorlikka ega veb-saytlar va ilovalar yaratuvchi dasturchi.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/avazbek.jpg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+
+<body class="loading-active">
+
+    <!-- Ambient Cursor Glow Spotlight -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Background Animated Canvas & Grid -->
+    <canvas id="ambientCanvas" class="ambient-canvas"></canvas>
+    <div class="ambient-grid"></div>
+
+    <!-- Page Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <span class="bracket">&lt;</span>
+                <span class="name">xudoyqulov.dev</span>
+                <span class="slash">/</span>
+                <span class="bracket">&gt;</span>
+            </div>
+            <div class="preloader-bar">
+                <div class="preloader-progress" id="preloaderProgress"></div>
+            </div>
+            <p class="preloader-text" id="preloaderText">Tizim yuklanmoqda...</p>
+        </div>
+    </div>
+
+    <!-- Sticky Glass Navigation Header -->
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <a href="#hero" class="nav-logo" id="navLogo">
+                <span class="logo-symbol">&lt;</span>
+                <span class="logo-text">xudoyqulov</span>
+                <span class="logo-dot">.dev</span>
+                <span class="logo-symbol">&gt;</span>
+            </a>
+
+            <!-- Desktop Navigation Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="#hero" class="nav-link active" data-i18n="nav_home">Bosh sahifa</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link" data-i18n="nav_about">Haqimda</a></li>
+                <li class="nav-item"><a href="#skills" class="nav-link" data-i18n="nav_skills">Ko'nikmalar</a></li>
+                <li class="nav-item"><a href="#projects" class="nav-link" data-i18n="nav_projects">Loyihalar</a></li>
+                <li class="nav-item"><a href="#services" class="nav-link" data-i18n="nav_services">Xizmatlar</a></li>
+                <li class="nav-item"><a href="#experience" class="nav-link" data-i18n="nav_experience">Tajriba</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link" data-i18n="nav_contact">Aloqa</a></li>
+            </ul>
+
+            <!-- Controls (Sound, Mood, Lang, Theme, Mobile toggle) -->
+            <div class="nav-controls">
+                <!-- Sound SFX Toggle -->
+                <button class="control-btn" id="soundToggle" title="Ovoz effektlarini yoqish/o'chirish"
+                    aria-label="Toggle Sound FX">
+                    <span class="control-icon" id="soundIcon">🔊</span>
+                </button>
+
+                <!-- Language Selector -->
+                <div class="lang-dropdown" id="langDropdown">
+                    <button class="lang-btn" id="langBtn" aria-label="Select Language">
+                        <span id="currentLang">UZ</span>
+                        <span class="arrow-down">▾</span>
+                    </button>
+                    <div class="lang-menu" id="langMenu">
+                        <button class="lang-option active" data-lang="uz">O'zbekcha</button>
+                        <button class="lang-option" data-lang="en">English</button>
+                        <button class="lang-option" data-lang="ru">Русский</button>
+                    </div>
+                </div>
+
+                <!-- Contact CTA Button in Navbar -->
+                <a href="#contact" class="btn btn-sm btn-primary nav-cta" id="navCta"
+                    data-i18n="nav_hire">Bog'lanish</a>
+
+                <!-- Mobile Hamburger Toggle -->
+                <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open Navigation Menu">
+                    <span class="bar bar-1"></span>
+                    <span class="bar bar-2"></span>
+                    <span class="bar bar-3"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-backdrop" id="drawerBackdrop"></div>
+        <div class="drawer-panel">
+            <div class="drawer-header">
+                <span class="drawer-logo">&lt;xudoyqulov.dev/&gt;</span>
+                <button class="drawer-close" id="drawerClose" aria-label="Close Menu">✕</button>
+            </div>
+            <ul class="drawer-links" id="drawerLinks">
+                <li><a href="#hero" class="drawer-link active" data-i18n="nav_home">Bosh sahifa</a></li>
+                <li><a href="#about" class="drawer-link" data-i18n="nav_about">Haqimda</a></li>
+                <li><a href="#skills" class="drawer-link" data-i18n="nav_skills">Ko'nikmalar</a></li>
+                <li><a href="#projects" class="drawer-link" data-i18n="nav_projects">Loyihalar</a></li>
+                <li><a href="#services" class="drawer-link" data-i18n="nav_services">Xizmatlar</a></li>
+                <li><a href="#experience" class="drawer-link" data-i18n="nav_experience">Tajriba</a></li>
+                <li><a href="#contact" class="drawer-link" data-i18n="nav_contact">Aloqa</a></li>
+            </ul>
+            <div class="drawer-footer">
+                <a href="https://t.me/Avazbek_xudoyqulov" target="_blank" rel="noopener noreferrer"
+                    class="btn btn-primary btn-block">Telegram (@Avazbek_xudoyqulov)</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN PAGE CONTENT -->
+    <main>
+
+        <!-- ================= HERO SECTION (ASOSIY KIRISH EMOTSIYA BILAN) ================= -->
+        <section class="hero-section" id="hero">
+            <div class="container hero-container hero-container-centered">
+
+                <!-- Top: Header Greeting & Identity -->
+                <div class="hero-header-center">
+                    <div class="hero-badge animate-fade-in" id="heroBadge">
+                        <span class="badge-pulse"></span>
+                        <span class="badge-text" data-i18n="hero_status">🚀 Yangi loyihalar uchun ochiqman</span>
+                    </div>
+
+                    <h1 class="hero-title animate-fade-in delay-1">
+                        <span class="greeting-text" data-i18n="hero_greeting">Assalomu alaykum, men</span>
+                        <span class="name-gradient">Avazbek Xudoyqulov</span>
+                    </h1>
+
+                    <div class="hero-typewriter-wrapper animate-fade-in delay-2">
+                        <span class="type-prefix">&gt; </span>
+                        <span class="typewriter-text" id="typewriterText">Full-Stack Dasturchi</span>
+                        <span class="typewriter-cursor">|</span>
+                    </div>
+                </div>
+
+                <!-- Center: Standalone Shattered & Assembling Portrait Showcase -->
+                <div class="hero-visual hero-visual-center">
+                    <div class="avatar-card-container" id="avatarCardContainer">
+
+                        <!-- Interactive Assembly HUD Status Pill -->
+                        <div class="assembly-hud-pill" id="assemblyHudPill">
+                            <span class="hud-pulse-dot"></span>
+                            <span class="hud-status-text" id="hudStatusText">🧩 Bo'laklangan (Pastga suring)</span>
+                            <span class="hud-progress-num" id="hudProgressNum">0%</span>
+                            <button type="button" class="hud-toggle-btn" id="hudToggleBtn" title="Avtomatik yig'ish / bo'laklash">⚡ Yig'ish</button>
+                        </div>
+
+                        <!-- Dynamic Aura & Floating Glow Rings -->
+                        <div class="avatar-glow-ring ring-outer" id="glowRingOuter"></div>
+                        <div class="avatar-glow-ring ring-inner" id="glowRingInner"></div>
+                        <div class="avatar-particles" id="avatarParticles"></div>
+
+                        <!-- 3D Tilting Portrait Frame -->
+                        <div class="avatar-3d-card" id="avatar3DCard">
+
+                            <!-- Floating Badges around Avatar -->
+                            <div class="floating-badge badge-top-left" id="badgeExp">
+                                <span class="badge-icon">💼</span>
+                                <div class="badge-info">
+                                    <strong class="badge-title">3+ Yillik</strong>
+                                    <span class="badge-sub">Amaliy Tajriba</span>
+                                </div>
+                            </div>
+
+                            <div class="floating-badge badge-bottom-right" id="badgeQuality">
+                                <span class="badge-icon">🛡️</span>
+                                <div class="badge-info">
+                                    <strong class="badge-title">100% Xavfsiz</strong>
+                                    <span class="badge-sub">Toza & Modern Kod</span>
+                                </div>
+                            </div>
+
+                            <!-- 3D Shattered Shards Matrix Layer (Floating & Assembling on Scroll) -->
+                            <div class="shards-matrix-container" id="shardsMatrixContainer" aria-hidden="true">
+                                <!-- 16 shards generated dynamically by script.js -->
+                            </div>
+
+                            <!-- Image Wrapper (Full Assembled Photo) -->
+                            <div class="avatar-image-frame" id="avatarImageFrame">
+                                <div class="frame-reflection"></div>
+                                <div class="scanline-overlay"></div>
+
+                                <!-- AVAZBEK'S PORTRAIT -->
+                                <img id="heroAvatarImg" src="images/avazbek.jpg" alt="Avazbek Xudoyqulov" class="avatar-photo"
+                                    loading="eager" />
+
+                                <!-- Floating Live Status Pill -->
+                                <div class="avatar-live-indicator" title="Ayni paytda faol">
+                                    <span class="live-dot"></span>
+                                    <span class="live-label">ONLINE</span>
+                                </div>
+
+                                <!-- Photo Change / File Picker Quick Tool -->
+                                <label class="avatar-change-btn" for="avatarFileInput"
+                                    title="Rasmni almashtirish / yuklash">
+                                    <span class="change-icon">📷</span>
+                                    <span class="change-tooltip">Rasmni yangilash</span>
+                                    <input type="file" id="avatarFileInput" accept="image/*" style="display:none;">
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- EMOTION & VIBE SELECTOR (EMOTSIYA BILAN) -->
+                        <div class="emotion-selector-box" id="emotionSelector">
+                            <span class="emotion-box-label">✨ Avazbekning Hissiyot & Vaybi:</span>
+                            <div class="emotion-buttons-row">
+                                <button class="vibe-btn active" data-mood="energetic" data-vibe="⚡ Yuqori Energiya"
+                                    data-quote="Tezkor, baquvvat va yuqori yuklamalarga chidamli tizimlar ustasi!"
+                                    title="Energiya holati">
+                                    <span class="vibe-emoji">⚡</span>
+                                    <span class="vibe-name">Energiya</span>
+                                </button>
+                                <button class="vibe-btn" data-mood="passionate" data-vibe="🔥 Cheksiz Ishtiyoq"
+                                    data-quote="Har bir satr kodda qalb va ishtiyoq — eng yuqori sifat sari intilaman."
+                                    title="Ishtiyoq holati">
+                                    <span class="vibe-emoji">🔥</span>
+                                    <span class="vibe-name">Ishtiyoq</span>
+                                </button>
+                                <button class="vibe-btn" data-mood="creative" data-vibe="💡 Yuksak Ijodkorlik"
+                                    data-quote="Noodatiy yechimlar, zamonaviy UI va ko'zni qamashtiruvchi tajriba."
+                                    title="Ijodkor holati">
+                                    <span class="vibe-emoji">💡</span>
+                                    <span class="vibe-name">Ijodkor</span>
+                                </button>
+                                <button class="vibe-btn" data-mood="focused" data-vibe="🎯 Qat'iy Fokus"
+                                    data-quote="Har bir detalga chuqur e'tibor, xavfsiz va barqaror arxitektura."
+                                    title="Fokus holati">
+                                    <span class="vibe-emoji">🎯</span>
+                                    <span class="vibe-name">Fokus</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Bottom: Bio, Emotional Motto, CTA Buttons, Socials -->
+                <div class="hero-bottom-center">
+                    <p class="hero-description animate-fade-in delay-3" data-i18n="hero_desc">
+                        Zamonaviy, yuqori darajada xavfsiz va ko'zni qamashtiruvchi raqamli veb-tajribalar yarataman.
+                        Har bir kod qatoriga chuqur ishtiyoq, har bir pikselga esa mukammallik bag'ishlayman.
+                    </p>
+
+                    <!-- Emotional Motto Box -->
+                    <div class="emotion-quote-card animate-fade-in delay-4" id="emotionQuoteCard">
+                        <div class="quote-icon">“</div>
+                        <p class="quote-text" id="dynamicQuoteText">
+                            Har bir loyihaga yurakdan yondashaman — g'oyalaringizni reallikka aylantirish mening
+                            burchim.
+                        </p>
+                        <div class="quote-badge" id="dynamicQuoteBadge">
+                            <span class="vibe-icon" id="currentVibeIcon">⚡</span>
+                            <span id="currentVibeLabel">Yuqori Energiya</span>
+                        </div>
+                    </div>
+
+                    <!-- Hero Call To Action Buttons -->
+                    <div class="hero-actions animate-fade-in delay-5">
+                        <a href="#projects" class="btn btn-primary btn-glow" id="heroProjectsBtn">
+                            <span data-i18n="hero_btn_projects">Loyihalarni ko'rish</span>
+                            <span class="btn-arrow">→</span>
+                        </a>
+                        <a href="#contact" class="btn btn-glass" id="heroContactBtn">
+                            <span data-i18n="hero_btn_contact">Bog'lanish</span>
+                        </a>
+                        <button class="btn btn-outline" id="cvDownloadBtn" title="Rezyumeni ko'rish">
+                            <span class="btn-icon">📄</span>
+                            <span data-i18n="hero_btn_cv">CV / Rezyume</span>
+                        </button>
+                    </div>
+
+                    <!-- Social Media Links -->
+                    <div class="hero-socials animate-fade-in delay-6">
+                        <span class="socials-label" data-i18n="hero_socials_label">Ijtimoiy tarmoqlar:</span>
+                        <div class="social-links-row">
+                            <a href="https://t.me/Avazbek_xudoyqulov" target="_blank" rel="noopener noreferrer"
+                                class="social-btn" title="Telegram (@Avazbek_xudoyqulov)"
+                                aria-label="Telegram (@Avazbek_xudoyqulov)">
+                                <svg viewBox="0 0 24 24" class="svg-icon">
+                                    <path fill="currentColor"
+                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .36z" />
+                                </svg>
+                            </a>
+                            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-btn"
+                                title="GitHub" aria-label="GitHub">
+                                <svg viewBox="0 0 24 24" class="svg-icon">
+                                    <path fill="currentColor"
+                                        d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+                                </svg>
+                            </a>
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-btn"
+                                title="LinkedIn" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24" class="svg-icon">
+                                    <path fill="currentColor"
+                                        d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                                </svg>
+                            </a>
+                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-btn"
+                                title="Instagram" aria-label="Instagram">
+                                <svg viewBox="0 0 24 24" class="svg-icon">
+                                    <path fill="currentColor"
+                                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Scroll Down Indicator -->
+            <a href="#about" class="scroll-indicator" aria-label="Pastga o'tish">
+                <span class="mouse-icon">
+                    <span class="mouse-wheel"></span>
+                </span>
+                <span class="scroll-text" data-i18n="hero_scroll">Pastga suring</span>
+            </a>
+        </section>
+
+        <!-- ================= STATS COUNTER STRIP ================= -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card" data-tilt>
+                        <div class="stat-number-wrap">
+                            <span class="stat-num" data-target="35">0</span>
+                            <span class="stat-suffix">+</span>
+                        </div>
+                        <p class="stat-label" data-i18n="stat_projects">Muvaffaqiyatli Loyihalar</p>
+                    </div>
+
+                    <div class="stat-card" data-tilt>
+                        <div class="stat-number-wrap">
+                            <span class="stat-num" data-target="99">0</span>
+                            <span class="stat-suffix">%</span>
+                        </div>
+                        <p class="stat-label" data-i18n="stat_satisfaction">Mijozlar Mamnuniyati</p>
+                    </div>
+
+                    <div class="stat-card" data-tilt>
+                        <div class="stat-number-wrap">
+                            <span class="stat-num" data-target="3">0</span>
+                            <span class="stat-suffix">+</span>
+                        </div>
+                        <p class="stat-label" data-i18n="stat_exp">Yillik Amaliy Tajriba</p>
+                    </div>
+
+                    <div class="stat-card" data-tilt>
+                        <div class="stat-number-wrap">
+                            <span class="stat-num" data-target="100">0</span>
+                            <span class="stat-suffix">%</span>
+                        </div>
+                        <p class="stat-label" data-i18n="stat_security">Xavfsizlik & Toza Kod</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= ABOUT SECTION (HAQIMDA) ================= -->
+        <section class="about-section" id="about">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag" data-i18n="about_tag">&lt;Tanishing /&gt;</div>
+                    <h2 class="section-title" data-i18n="about_title">Men Haqimda</h2>
+                    <p class="section-subtitle" data-i18n="about_subtitle">Mukammallik sari intiluvchi dasturchining
+                        qadriyatlari va faoliyati</p>
+                </div>
+
+                <div class="about-grid">
+                    <!-- Bio Narrative -->
+                    <div class="about-story-card">
+                        <h3 class="about-heading">
+                            Salom! Men <span class="text-accent">Avazbek</span> — zamonaviy texnologiyalar yordamida
+                            g'oyalarni haqiqatga aylantiraman.
+                        </h3>
+                        <p class="about-text">
+                            Dasturlash men uchun shunchaki kod yozish emas, balki real muammolarni eng xavfsiz, chiroyli
+                            va qulay tarzda hal qilish san'atidir. Men foydalanuvchiga zavq beruvchi interfeyslar
+                            (Frontend) va chaqmoqdek tez, xavfsiz server arxitekturalarini (Backend) birlashtiraman.
+                        </p>
+                        <p class="about-text">
+                            Doim yangi zamonaviy standartlar, toza arxitektura (Clean Architecture) va axborot
+                            xavfsizligi bo'yicha eng yaxshi amaliyotlarga amal qilaman. Har bir loyihani o'z
+                            mahsulotimdek mehr va mas'uliyat bilan yarataman.
+                        </p>
+
+                        <!-- Key Principles Grid -->
+                        <div class="principles-grid">
+                            <div class="principle-item">
+                                <div class="principle-icon">🛡️</div>
+                                <div class="principle-info">
+                                    <h4>Eng Yuqori Xavfsizlik</h4>
+                                    <p>OWASP standartlari, ma'lumotlarni shifrlash va xavfsiz ma'lumotlar oqimi.</p>
+                                </div>
+                            </div>
+                            <div class="principle-item">
+                                <div class="principle-icon">⚡</div>
+                                <div class="principle-info">
+                                    <h4>Yuqori Tezlik</h4>
+                                    <p>Lighthouse 95+ ball, minimal yuklanish vaqti va samaradorlik.</p>
+                                </div>
+                            </div>
+                            <div class="principle-item">
+                                <div class="principle-icon">🎨</div>
+                                <div class="principle-info">
+                                    <h4>Zamonaviy UI/UX</h4>
+                                    <p>Ko'zga yoqimli animatsiyalar, intuitiv interfeys va moslashuvchanlik.</p>
+                                </div>
+                            </div>
+                            <div class="principle-item">
+                                <div class="principle-icon">🧩</div>
+                                <div class="principle-info">
+                                    <h4>Modulli Kod</h4>
+                                    <p>Oson kengayuvchan, toza va xatosiz hujjatlashtirilgan kod bazasi.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Developer Terminal Card -->
+                    <div class="about-code-card">
+                        <div class="terminal-header">
+                            <div class="terminal-dots">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                            </div>
+                            <span class="terminal-title">xudoyqulov-profile.json</span>
+                            <button class="copy-code-btn" id="copyCodeBtn" title="JSON koddan nusxa olish">
+                                <span class="copy-icon">📋</span>
+                                <span class="copy-tooltip">Nusxa olindi!</span>
+                            </button>
+                        </div>
+                        <div class="terminal-body">
+                            <pre><code class="code-json" id="devJsonCode">{
+  <span class="key">"name"</span>: <span class="string">"Avazbek Xudoyqulov"</span>,
+  <span class="key">"brand"</span>: <span class="string">"xudoyqulov.dev"</span>,
+  <span class="key">"telegram"</span>: <span class="string">"@Avazbek_xudoyqulov"</span>,
+  <span class="key">"role"</span>: <span class="string">"Full-Stack Developer & UI/UX"</span>,
+  <span class="key">"location"</span>: <span class="string">"Tashkent, Uzbekistan"</span>,
+  <span class="key">"experience"</span>: <span class="string">"3+ years"</span>,
+  <span class="key">"passions"</span>: [
+    <span class="string">"Interactive Web Animations"</span>,
+    <span class="string">"Cyber Security & Safe APIs"</span>,
+    <span class="string">"Scalable Cloud Architecture"</span>
+  ],
+  <span class="key">"primaryStack"</span>: {
+    <span class="key">"frontend"</span>: [<span class="string">"JavaScript"</span>, <span class="string">"React"</span>, <span class="string">"Next.js"</span>, <span class="string">"TypeScript"</span>],
+    <span class="key">"backend"</span>: [<span class="string">"Node.js"</span>, <span class="string">"Express"</span>, <span class="string">"Python"</span>, <span class="string">"PostgreSQL"</span>],
+    <span class="key">"styling"</span>: [<span class="string">"Modern CSS3"</span>, <span class="string">"Animations"</span>, <span class="string">"Tailwind"</span>]
+  },
+  <span class="key">"workPhilosophy"</span>: <span class="string">"Mukammallik har bir mayda detalda yashiringan"</span>,
+  <span class="key">"availability"</span>: <span class="boolean">true</span>
+}</code></pre>
+                        </div>
+                        <div class="terminal-footer">
+                            <span class="terminal-status"><span class="status-indicator"></span> Profil holati: Faol va
+                                hamkorlikka tayyor</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SKILLS MATRIX SECTION (KO'NIKMALAR) ================= -->
+        <section class="skills-section" id="skills">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag" data-i18n="skills_tag">&lt;Imkoniyatlar /&gt;</div>
+                    <h2 class="section-title" data-i18n="skills_title">Ko'nikmalar & Texnologiyalar</h2>
+                    <p class="section-subtitle" data-i18n="skills_subtitle">Har kuni amalda qo'llaniladigan va chuqur
+                        o'rganilgan zamonaviy vositalar</p>
+                </div>
+
+                <!-- Skill Filter Tabs -->
+                <div class="skills-tab-filter">
+                    <button class="tab-btn active" data-filter="all">Barchasi</button>
+                    <button class="tab-btn" data-filter="frontend">Frontend</button>
+                    <button class="tab-btn" data-filter="backend">Backend & DB</button>
+                    <button class="tab-btn" data-filter="tools">DevOps & Asboblar</button>
+                    <button class="tab-btn" data-filter="security">Xavfsizlik & UI</button>
+                </div>
+
+                <!-- Skills Cards Grid -->
+                <div class="skills-grid" id="skillsGrid">
+
+                    <!-- HTML5 / CSS3 -->
+                    <div class="skill-card" data-category="frontend" data-tilt>
+                        <div class="skill-header">
+                            <div class="skill-icon-box orange">🎨</div>
+                            <div class="skill-meta">
+                                <h3 class="skill-name">HTML5 & Modern CSS3</h3>
+                                <span class="skill-level">Mukammal daraja</span>
+                            </div>
+                            <span class="skill-percent">98%</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" style="--percent: 98%;"></div>
+                        </div>
+                        <p class="skill-desc">Flexbox, Grid, CSS animatsiyalar, 3D transformatsiyalar va semantik
+                            tuzilma.</p>
+                    </div>
+
+                    <!-- JavaScript (ES6+) -->
+                    <div class="skill-card" data-category="frontend" data-tilt>
+                        <div class="skill-header">
+                            <div class="skill-icon-box yellow">⚡</div>
+                            <div class="skill-meta">
+                                <h3 class="skill-name">JavaScript (ES6+)</h3>
+                                <span class="skill-level">Ilg'or daraja</span>
+                            </div>
+                            <span class="skill-percent">95%</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" style="--percent: 95%;"></div>
+                        </div>
+                        <p class="skill-desc">Asinxron dasturlash, DOM manipulatsiyasi, Event Loop, zamonaviy API-lar.
+                        </p>
+                    </div>
+
+                    <!-- React & Next.js -->
+                    <div class="skill-card" data-category="frontend" data-tilt>
+                        <div class="skill-header">
+                            <div class="skill-icon-box cyan">⚛️</div>
+                            <div class="skill-meta">
+                                <h3 class="skill-name">React.js & Next.js</h3>
+                                <span class="skill-level">Ilg'or daraja</span>
+                            </div>
+                            <span class="skill-percent">92%</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" style="--percent: 92%;"></div>
+                        </div>
+                        <p class="skill-desc">Hooks, State Management (Redux/Zustand), SSR/SSG, marshrutlash va
+                            optimizatsiya.</p>
+                    </div>
+
+                    <!-- TypeScript -->
+                    <div class="skill-card" data-category="frontend" data-tilt>
+                        <div class="skill-header">
+                            <div class="skill-icon-box blue">🔷</div>
+                            <div class="skill-meta">
+                                <h3 class="skill-name">TypeScript</h3>
+                                <span class="skill-level">Amaliy daraja</span>
+                            </div>
+                            <span class="skill-percent">88%</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" style="--percent: 88%;"></div>
+                        </div>
+                        <p class="skill-desc">Qat'iy tiplashtirish, interfeyslar, generic tiplar va xatolarni oldindan
+                            bartaraf qilish.</p>
+                    </div>
+
+                    <!-- Node.js & Express -->
+                    <div class="skill-card" data-category="backend" data-tilt>
+                        <div class="skill-header">
+                            <div class="skill-icon-box green">🟢</div>
+                            <div class="skill-meta">
+                                <h3 class="skill-name">Node.js & Express</h3>
+                                <span class="skill-level">Ilg'or daraja</span>
+                            </div>
+                            <span class="skill-percent">90%</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" style="--percent: 90%;"></div>
+                        </div>
+                        <p class="skill-desc">REST API, middleware, autentifikatsiya (JWT/OAuth), xavfsiz
+                            mikroservislar.</p>
+                    </div>
+
+                    <!-- Database / PostgreSQL & MongoDB -->
+                    <div class="skill-card" data-category="backend" data-tilt>
+                        <div class="skill-header">
+                            <div class="skill-icon-box purple">🗄️</div>
+                            <div class="skill-meta">
+                                <h3 class="skill-name">PostgreSQL & MongoDB</h3>
+                                <span class="skill-level">Amaliy daraja</span>
+                            </div>
+                            <span class="skill-percent">86%</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" style="--percent: 86%;"></div>
+                        </div>
+                        <p class="skill-desc">SQL so'rovlar, indekslash, ORM (Prisma/Mongoose), relyatsion va hujjatli
+                            bazalar.</p>
+                    </div>
+
+                    <!-- Web Security & Safe Code -->
+                    <div class="skill-card" data-category="security" data-tilt>
+                        <div class="skill-header">
+                            <div class="skill-icon-box emerald">🛡️</div>
+                            <div class="skill-meta">
+                                <h3 class="skill-name">Xavfsizlik & OWASP</h3>
+                                <span class="skill-level">Yuqori daraja</span>
+                            </div>
+                            <span class="skill-percent">94%</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" style="--percent: 94%;"></div>
+                        </div>
+                        <p class="skill-desc">XSS, CSRF, SQL Injection himoyasi, CORS boshqaruvi va ma'lumotlar
+                            xavfsizligi.</p>
+                    </div>
+
+                    <!-- Git, Docker & DevOps -->
+                    <div class="skill-card" data-category="tools" data-tilt>
+                        <div class="skill-header">
+                            <div class="skill-icon-box red">🚀</div>
+                            <div class="skill-meta">
+                                <h3 class="skill-name">Git, GitHub & Docker</h3>
+                                <span class="skill-level">Amaliy daraja</span>
+                            </div>
+                            <span class="skill-percent">89%</span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" style="--percent: 89%;"></div>
+                        </div>
+                        <p class="skill-desc">Versiya nazorati, CI/CD integratsiya, konteynerlash va avtomatlashtirish.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PROJECTS SHOWCASE SECTION (LOYIHALAR) ================= -->
+        <section class="projects-section" id="projects">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag" data-i18n="projects_tag">&lt;Portfolio /&gt;</div>
+                    <h2 class="section-title" data-i18n="projects_title">Saralangan Loyihalar</h2>
+                    <p class="section-subtitle" data-i18n="projects_subtitle">Amalda tatbiq etilgan eng muvaffaqiyatli
+                        va zamonaviy yechimlar</p>
+                </div>
+
+                <!-- Projects Filter Buttons -->
+                <div class="project-filters">
+                    <button class="filter-pill active" data-filter="all">Barchasi</button>
+                    <button class="filter-pill" data-filter="web-app">Web Ilovalar</button>
+                    <button class="filter-pill" data-filter="ecommerce">E-Commerce</button>
+                    <button class="filter-pill" data-filter="saas">SaaS & Dashboard</button>
+                </div>
+
+                <!-- Projects Grid -->
+                <div class="projects-grid" id="projectsGrid">
+
+                    <!-- PROJECT 1: FinTech PayFlow -->
+                    <div class="project-card" data-category="saas" data-tilt>
+                        <div class="project-banner project-banner-fintech">
+                            <div class="banner-badge">SaaS & Finans</div>
+                            <div class="project-mockup-graphic">
+                                <div class="mockup-chart">
+                                    <div class="bar-col" style="height: 45%;"></div>
+                                    <div class="bar-col" style="height: 75%;"></div>
+                                    <div class="bar-col" style="height: 60%;"></div>
+                                    <div class="bar-col active" style="height: 90%;"></div>
+                                    <div class="bar-col" style="height: 65%;"></div>
+                                </div>
+                                <div class="mockup-card-chip">💳 PayFlow Secure</div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">React</span>
+                                <span class="tag">Node.js</span>
+                                <span class="tag">PostgreSQL</span>
+                                <span class="tag">Chart.js</span>
+                            </div>
+                            <h3 class="project-title">PayFlow — Onlayn Moliya & To'lovlar Tizimi</h3>
+                            <p class="project-summary">
+                                Katta miqdordagi tranzaksiyalarni xavfsiz boshqarish, tahliliy grafiklar va qulay
+                                hisobotlarni taqdim etuvchi zamonaviy fintex platforma.
+                            </p>
+                            <div class="project-footer">
+                                <button class="btn btn-sm btn-primary project-modal-btn" data-project="fintech">Batafsil
+                                    ko'rish</button>
+                                <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+                                    class="project-link-icon" title="GitHub Kodini ko'rish">
+                                    <svg viewBox="0 0 24 24" class="svg-icon-sm">
+                                        <path fill="currentColor"
+                                            d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PROJECT 2: EduMaster AI -->
+                    <div class="project-card" data-category="web-app" data-tilt>
+                        <div class="project-banner project-banner-ai">
+                            <div class="banner-badge">AI & Ta'lim</div>
+                            <div class="project-mockup-graphic">
+                                <div class="ai-orb"></div>
+                                <div class="ai-text-box">🤖 AI Tutor: Javob tayyor!</div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Next.js</span>
+                                <span class="tag">OpenAI API</span>
+                                <span class="tag">Tailwind</span>
+                                <span class="tag">MongoDB</span>
+                            </div>
+                            <h3 class="project-title">EduMaster AI — Aqlli Ta'lim Platformasi</h3>
+                            <p class="project-summary">
+                                Foydalanuvchilarga individual o'quv dasturlarini tuzib beruvchi, sun'iy intellekt orqali
+                                testlarni tekshiruvchi interaktiv veb-ilova.
+                            </p>
+                            <div class="project-footer">
+                                <button class="btn btn-sm btn-primary project-modal-btn"
+                                    data-project="edumaster">Batafsil ko'rish</button>
+                                <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+                                    class="project-link-icon" title="GitHub Kodini ko'rish">
+                                    <svg viewBox="0 0 24 24" class="svg-icon-sm">
+                                        <path fill="currentColor"
+                                            d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PROJECT 3: Apex Supermarket E-Commerce -->
+                    <div class="project-card" data-category="ecommerce" data-tilt>
+                        <div class="project-banner project-banner-ecommerce">
+                            <div class="banner-badge">E-Commerce</div>
+                            <div class="project-mockup-graphic">
+                                <div class="cart-box">🛍️ Apex Store</div>
+                                <div class="item-bubble">⚡ Tezkor yetkazish</div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">React</span>
+                                <span class="tag">Redux Toolkit</span>
+                                <span class="tag">Express</span>
+                                <span class="tag">Stripe/Click</span>
+                            </div>
+                            <h3 class="project-title">Apex Store — Katta Yuklamali Internet Do'kon</h3>
+                            <p class="project-summary">
+                                10,000+ mahsulotga mo'ljallangan filtratsiya, qulay savat, to'lov tizimlari va tezkor
+                                buyurtma boshqaruv tizimiga ega onlayn do'kon.
+                            </p>
+                            <div class="project-footer">
+                                <button class="btn btn-sm btn-primary project-modal-btn" data-project="apex">Batafsil
+                                    ko'rish</button>
+                                <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+                                    class="project-link-icon" title="GitHub Kodini ko'rish">
+                                    <svg viewBox="0 0 24 24" class="svg-icon-sm">
+                                        <path fill="currentColor"
+                                            d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PROJECT 4: CloudSync SaaS Dashboard -->
+                    <div class="project-card" data-category="saas" data-tilt>
+                        <div class="project-banner project-banner-cloud">
+                            <div class="banner-badge">Cloud Dashboard</div>
+                            <div class="project-mockup-graphic">
+                                <div class="server-status">☁️ Serverlar: 100% Online</div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">TypeScript</span>
+                                <span class="tag">Vue.js</span>
+                                <span class="tag">Node.js</span>
+                                <span class="tag">Docker</span>
+                            </div>
+                            <h3 class="project-title">CloudSync — Bulutli Server & Server Boshqaruvi</h3>
+                            <p class="project-summary">
+                                Serverlar holatini real vaqtda kuzatish, xotira sarfini nazorat qilish va
+                                avtomatlashtirilgan zaxira nusxalar olish tizimi.
+                            </p>
+                            <div class="project-footer">
+                                <button class="btn btn-sm btn-primary project-modal-btn"
+                                    data-project="cloudsync">Batafsil ko'rish</button>
+                                <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+                                    class="project-link-icon" title="GitHub Kodini ko'rish">
+                                    <svg viewBox="0 0 24 24" class="svg-icon-sm">
+                                        <path fill="currentColor"
+                                            d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PROJECT 5: HealthPulse Telemedicine -->
+                    <div class="project-card" data-category="web-app" data-tilt>
+                        <div class="project-banner project-banner-health">
+                            <div class="banner-badge">Tibbiyot & WebRTC</div>
+                            <div class="project-mockup-graphic">
+                                <div class="pulse-line">💓 72 bpm</div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">React</span>
+                                <span class="tag">WebRTC</span>
+                                <span class="tag">Socket.io</span>
+                                <span class="tag">Security</span>
+                            </div>
+                            <h3 class="project-title">HealthPulse — Xavfsiz Telemeditsina Servisi</h3>
+                            <p class="project-summary">
+                                Shifokor va bemorlar o'rtasida to'g'ridan-to'g'ri shifrlangan video-muloqot va tibbiy
+                                ma'lumotlarni xavfsiz almashish platformasi.
+                            </p>
+                            <div class="project-footer">
+                                <button class="btn btn-sm btn-primary project-modal-btn"
+                                    data-project="healthpulse">Batafsil ko'rish</button>
+                                <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+                                    class="project-link-icon" title="GitHub Kodini ko'rish">
+                                    <svg viewBox="0 0 24 24" class="svg-icon-sm">
+                                        <path fill="currentColor"
+                                            d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PROJECT 6: DevForge Portfolio Studio -->
+                    <div class="project-card" data-category="web-app" data-tilt>
+                        <div class="project-banner project-banner-studio">
+                            <div class="banner-badge">Studio & Tools</div>
+                            <div class="project-mockup-graphic">
+                                <div class="code-badge-preview">&lt;DevStudio /&gt;</div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="tag">Vanilla JS</span>
+                                <span class="tag">CSS Grid</span>
+                                <span class="tag">Canvas</span>
+                                <span class="tag">SEO Pro</span>
+                            </div>
+                            <h3 class="project-title">DevForge — Interaktiv Portfolio & UI Framework</h3>
+                            <p class="project-summary">
+                                Dasturchilar uchun maxsus moslashuvchan, 3D animatsiyali va yuqori xavfsizlikka
+                                asoslangan shaxsiy brend vositasi.
+                            </p>
+                            <div class="project-footer">
+                                <button class="btn btn-sm btn-primary project-modal-btn"
+                                    data-project="devforge">Batafsil ko'rish</button>
+                                <a href="https://github.com" target="_blank" rel="noopener noreferrer"
+                                    class="project-link-icon" title="GitHub Kodini ko'rish">
+                                    <svg viewBox="0 0 24 24" class="svg-icon-sm">
+                                        <path fill="currentColor"
+                                            d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SERVICES SECTION (XIZMATLAR) ================= -->
+        <section class="services-section" id="services">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag" data-i18n="services_tag">&lt;Takliflar /&gt;</div>
+                    <h2 class="section-title" data-i18n="services_title">Ko'rsatiladigan Xizmatlar</h2>
+                    <p class="section-subtitle" data-i18n="services_subtitle">Biznesingiz yoki loyihangiz uchun noldan
+                        to'liq ishga tushirishgacha professional xizmatlar</p>
+                </div>
+
+                <div class="services-grid">
+
+                    <div class="service-card" data-tilt>
+                        <div class="service-icon-wrap violet">
+                            <span>💻</span>
+                        </div>
+                        <h3 class="service-title">To'liq Web Sayt Yaratish</h3>
+                        <p class="service-desc">
+                            Zamonaviy korporativ saytlar, landing pagelar va murakkab veb portallarni noldan
+                            professional darajada ishlab chiqish.
+                        </p>
+                        <ul class="service-features">
+                            <li>✓ Barcha ekranlarga mos (Responsive)</li>
+                            <li>✓ Tezkor yuklanish va SEO optimizatsiya</li>
+                            <li>✓ Qulay boshqaruv paneli (Admin)</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card" data-tilt>
+                        <div class="service-icon-wrap cyan">
+                            <span>⚙️</span>
+                        </div>
+                        <h3 class="service-title">Backend & API Integratsiya</h3>
+                        <p class="service-desc">
+                            Katta yuklamalarga chidamli serverlar, xavfsiz RESTful APIlar va ma'lumotlar bazalarini
+                            noldan loyihalash.
+                        </p>
+                        <ul class="service-features">
+                            <li>✓ Xavfsiz avtorizatsiya va to'lovlar</li>
+                            <li>✓ Real-time ma'lumotlar almashinuvi</li>
+                            <li>✓ Yuqori darajadagi kiberxavfsizlik</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card" data-tilt>
+                        <div class="service-icon-wrap amber">
+                            <span>✨</span>
+                        </div>
+                        <h3 class="service-title">UI/UX Dizayn & Animatsiya</h3>
+                        <p class="service-desc">
+                            Foydalanuvchilarni o'ziga jalb qiluvchi interaktiv interfeyslar, silliq animatsiyalar va
+                            zamonaviy vizual estetika.
+                        </p>
+                        <ul class="service-features">
+                            <li>✓ Foydalanuvchi psixologiyasiga mos UX</li>
+                            <li>✓ Zamonaviy mikrokontent & animatsiyalar</li>
+                            <li>✓ Brend identifikatsiyasi va uslubi</li>
+                        </ul>
+                    </div>
+
+                    <div class="service-card" data-tilt>
+                        <div class="service-icon-wrap emerald">
+                            <span>🛡️</span>
+                        </div>
+                        <h3 class="service-title">Optimizatsiya & Xavfsizlik Auditi</h3>
+                        <p class="service-desc">
+                            Mavjud saytlarni tekshirish, tezlikni oshirish, zaifliklarni bartaraf etish va texnik
+                            qo'llab-quvvatlash.
+                        </p>
+                        <ul class="service-features">
+                            <li>✓ Zaifliklarni aniqlash va yopish</li>
+                            <li>✓ Google PageSpeed 95+ ga chiqarish</li>
+                            <li>✓ 24/7 Monitoring va texnik yordam</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= EXPERIENCE & TIMELINE (TAJRIBA) ================= -->
+        <section class="experience-section" id="experience">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag" data-i18n="exp_tag">&lt;Yo'l Xaritasi /&gt;</div>
+                    <h2 class="section-title" data-i18n="exp_title">Tajriba & Bosqichlar</h2>
+                    <p class="section-subtitle" data-i18n="exp_subtitle">Kasbiy rivojlanish va muvaffaqiyatli qadamlar
+                        xronologiyasi</p>
+                </div>
+
+                <div class="timeline">
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2024 — Hozirgacha</div>
+                        <div class="timeline-content">
+                            <span class="timeline-badge">Hozirgi bosqich</span>
+                            <h3 class="timeline-role">Senior / Lead Full-Stack Developer</h3>
+                            <h4 class="timeline-company">Freelance & Mustaqil Loyihalar</h4>
+                            <p class="timeline-text">
+                                Xalqaro va mahalliy buyurtmachilar uchun murakkab veb-ilovalar, fintex va SaaS
+                                platformalarini arxitekturasini yaratish, jamoa kodini audit qilish va xavfsiz
+                                tizimlarni ishga tushirish.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2023 — 2024</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-role">Frontend & Full-Stack Dasturchi</h3>
+                            <h4 class="timeline-company">Innovatsion IT Kompaniya</h4>
+                            <p class="timeline-text">
+                                React va Next.js asosida tezkor, moslashuvchan veb interfeyslar ishlab chiqish, REST API
+                                integratsiyasi va foydalanuvchi tajribasini (UX) tubdan yaxshilash.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">2022 — 2023</div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-role">Junior Web Dasturchi</h3>
+                            <h4 class="timeline-company">Web Studio & Startuplar</h4>
+                            <p class="timeline-text">
+                                HTML5, CSS3, zamonaviy JavaScript texnologiyalari orqali 20 dan ortiq tijorat saytlari
+                                va landing sahifalarini muvaffaqiyatli topshirish, toza kod yozish madaniyatini
+                                shakllantirish.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CONTACT SECTION (ALOQA) ================= -->
+        <section class="contact-section" id="contact">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag" data-i18n="contact_tag">&lt;Bog'lanish /&gt;</div>
+                    <h2 class="section-title" data-i18n="contact_title">Keling, Birga Yaratamiz!</h2>
+                    <p class="section-subtitle" data-i18n="contact_subtitle">Loyihangiz bormi yoki yangi g'oyani
+                        muhokama qilmoqchimisiz? Men doim tayyorman!</p>
+                </div>
+
+                <div class="contact-grid">
+
+                    <!-- Direct Info Cards -->
+                    <div class="contact-info-col">
+                        <div class="contact-card" data-tilt>
+                            <div class="contact-icon-box tg">✈️</div>
+                            <div class="contact-details">
+                                <span class="contact-type">Telegram</span>
+                                <strong class="contact-val">@Avazbek_xudoyqulov</strong>
+                                <a href="https://t.me/Avazbek_xudoyqulov" target="_blank" rel="noopener noreferrer"
+                                    class="contact-link">Tezkor xabar yozish (@Avazbek_xudoyqulov) →</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-card" data-tilt>
+                            <div class="contact-icon-box mail">✉️</div>
+                            <div class="contact-details">
+                                <span class="contact-type">Elektron pochta</span>
+                                <strong class="contact-val">xudoyqulov.dev@gmail.com</strong>
+                                <a href="mailto:xudoyqulov.dev@gmail.com" class="contact-link">Email yuborish →</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-card" data-tilt>
+                            <div class="contact-icon-box loc">📍</div>
+                            <div class="contact-details">
+                                <span class="contact-type">Manzil</span>
+                                <strong class="contact-val">Toshkent, O'zbekiston</strong>
+                                <span class="contact-note">Masofaviy (Remote) & Ofis loyihalari</span>
+                            </div>
+                        </div>
+
+                        <!-- Direct Telegram Prompt Box -->
+                        <div class="quick-tg-box">
+                            <h4>🚀 Tezkor aloqa kerakmi?</h4>
+                            <p>Telegram orqali to'g'ridan-to'g'ri yozing (@Avazbek_xudoyqulov), odatda 15 daqiqa ichida
+                                javob beraman!</p>
+                            <a href="https://t.me/Avazbek_xudoyqulov" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-primary btn-block">
+                                <span>Telegramda Yozish (@Avazbek_xudoyqulov)</span>
+                                <span>💬</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Contact Form -->
+                    <div class="contact-form-col">
+                        <form class="contact-form" id="contactForm" novalidate>
+                            <h3 class="form-title">Xabar Yuborish</h3>
+                            <p class="form-desc">Formani to'ldiring, tez orada siz bilan bog'lanaman.</p>
+
+                            <div class="form-group">
+                                <label for="userName" class="form-label">Ismingiz <span
+                                        class="required">*</span></label>
+                                <input type="text" id="userName" name="name" class="form-input"
+                                    placeholder="Masalan: Sardor Aliyev" required>
+                                <span class="form-error" id="nameError">Iltimos, ismingizni kiriting</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="userEmail" class="form-label">Email yoki Telefon raqamingiz <span
+                                        class="required">*</span></label>
+                                <input type="text" id="userEmail" name="email" class="form-input"
+                                    placeholder="masalan@gmail.com yoki +998 90 123 45 67" required>
+                                <span class="form-error" id="emailError">Iltimos, to'g'ri aloqa ma'lumotini
+                                    kiriting</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="serviceType" class="form-label">Qiziqtirgan xizmat turi</label>
+                                <select id="serviceType" name="service" class="form-select">
+                                    <option value="website">Yangi veb-sayt yaratish</option>
+                                    <option value="webapp">Murakkab Web Ilova / SaaS</option>
+                                    <option value="ecommerce">Internet Do'kon (E-commerce)</option>
+                                    <option value="redesign">Qayta dizayn & Tezlashtirish</option>
+                                    <option value="other">Boshqa taklif / Konsultatsiya</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="userMessage" class="form-label">Loyihangiz haqida qisqacha <span
+                                        class="required">*</span></label>
+                                <textarea id="userMessage" name="message" class="form-textarea" rows="4"
+                                    placeholder="Loyiha maqsadi, muddatlari yoki talablari..." required></textarea>
+                                <span class="form-error" id="messageError">Iltimos, xabaringizni yozing</span>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-glow btn-block" id="formSubmitBtn">
+                                <span class="btn-text">Xabarni Yuborish</span>
+                                <span class="btn-spinner" id="btnSpinner"></span>
+                                <span class="btn-icon">🚀</span>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="#hero" class="footer-logo">&lt;xudoyqulov.dev/&gt;</a>
+                <p class="footer-bio">
+                    Mukammallik, xavfsizlik va zamonaviy uslub birlashgan joyda yangi g'oyalar hayotga tatbiq etiladi.
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <h4 class="footer-heading">Tezkor Havolalar</h4>
+                <ul class="footer-nav">
+                    <li><a href="#hero">Bosh sahifa</a></li>
+                    <li><a href="#about">Men Haqimda</a></li>
+                    <li><a href="#skills">Ko'nikmalar</a></li>
+                    <li><a href="#projects">Loyihalar</a></li>
+                    <li><a href="#contact">Bog'lanish</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-copy-col">
+                <p class="copyright-text">
+                    © <span id="currentYear">2026</span> xudoyqulov.dev (Avazbek Xudoyqulov). Barcha huquqlar
+                    himoyalangan.
+                </p>
+                <p class="crafted-text">
+                    Dizayn va xavfsiz kod mehr bilan yaratildi ❤️
+                </p>
+                <button class="back-to-top" id="backToTopBtn" title="Yuqoriga qaytish" aria-label="Yuqoriga qaytish">
+                    ↑
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= PROJECT DETAIL MODAL ================= -->
+    <div class="project-modal" id="projectModal" aria-hidden="true">
+        <div class="modal-backdrop" id="modalBackdrop"></div>
+        <div class="modal-container">
+            <button class="modal-close-btn" id="modalCloseBtn" aria-label="Yopish">✕</button>
+            <div class="modal-header">
+                <span class="modal-tag" id="modalTag">Kategoriya</span>
+                <h3 class="modal-title" id="modalTitle">Loyiha Nomi</h3>
+            </div>
+            <div class="modal-body">
+                <div class="modal-preview-graphic" id="modalPreviewGraphic"></div>
+                <div class="modal-description-box">
+                    <h4>Loyiha haqida:</h4>
+                    <p id="modalDesc">Loyiha tavsifi bu yerda ko'rinadi.</p>
+                </div>
+                <div class="modal-tech-box">
+                    <h4>Foydalanilgan texnologiyalar:</h4>
+                    <div class="modal-tech-tags" id="modalTechTags"></div>
+                </div>
+                <div class="modal-highlights">
+                    <h4>Asosiy yutuqlar:</h4>
+                    <ul id="modalHighlightsList"></ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline"
+                    id="modalGithubBtn">
+                    <span>GitHub Kod</span>
+                    <svg viewBox="0 0 24 24" class="svg-icon-sm">
+                        <path fill="currentColor"
+                            d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+                    </svg>
+                </a>
+                <button class="btn btn-primary" id="modalLiveDemoBtn">Jonli Demo</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Element -->
+    <div class="toast-notification" id="toastNotification">
+        <span class="toast-icon" id="toastIcon">✅</span>
+        <div class="toast-message">
+            <strong id="toastTitle">Muvaffaqiyatli!</strong>
+            <p id="toastBody">Xabaringiz qabul qilindi.</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>
