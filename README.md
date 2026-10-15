@@ -1,7 +1,11 @@
 # ⚡ xudoyqulov.dev — Shaxsiy Portfolio Veb-Ilovasi
 
 Zamonaviy, ultra-xavfsiz, interaktiv va yuqori darajadagi estetikaga ega shaxsiy portfolio veb-sayti (**xudoyqulov.dev**).
-Rasmiy Telegram: [@Avazbek_xudoyqulov](https://t.me/Avazbek_xudoyqulov)
+
+- ✈️ **Telegram**: [@Avazbek_xudoyqulov](https://t.me/Avazbek_xudoyqulov)
+- 📺 **YouTube**: [@Xudoyqulov-Dev](https://www.youtube.com/@Xudoyqulov-Dev)
+- 📷 **Instagram**: [@xudoyqulovavazbek0510cr7](https://www.instagram.com/xudoyqulovavazbek0510cr7/)
+- 💻 **GitHub**: [xudoyqulovavazbek0510cr7-alt](https://github.com/xudoyqulovavazbek0510cr7-alt)
 
 ---
 
