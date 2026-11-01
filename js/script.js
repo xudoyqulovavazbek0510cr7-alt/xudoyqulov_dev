@@ -12,29 +12,34 @@ document.addEventListener('DOMContentLoaded', () => {
         constructor() {
             this.ctx = null;
             this.enabled = true;
-            this.init();
+            this.initialized = false;
         }
 
-        init() {
+        initOnGesture() {
+            if (this.initialized) return;
             try {
                 const AudioCtx = window.AudioContext || window.webkitAudioContext;
                 if (AudioCtx) {
                     this.ctx = new AudioCtx();
+                    this.initialized = true;
                 }
             } catch (e) {
-                console.warn('AudioContext mavjud emas:', e);
+                // AudioContext not supported
             }
         }
 
         resume() {
+            this.initOnGesture();
             if (this.ctx && this.ctx.state === 'suspended') {
-                this.ctx.resume();
+                this.ctx.resume().catch(() => {});
             }
         }
 
         playBlip(freq = 600, type = 'sine', duration = 0.08) {
-            if (!this.enabled || !this.ctx) return;
+            if (!this.enabled) return;
             this.resume();
+            if (!this.ctx || this.ctx.state === 'suspended') return;
+
             try {
                 const osc = this.ctx.createOscillator();
                 const gain = this.ctx.createGain();
@@ -51,12 +56,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 osc.start();
                 osc.stop(this.ctx.currentTime + duration);
             } catch (e) {
-                // Ignore audio error
+                // Ignore audio error safely
             }
         }
 
         playChime() {
-            if (!this.enabled || !this.ctx) return;
+            if (!this.enabled) return;
             this.playBlip(784, 'sine', 0.12);
             setTimeout(() => this.playBlip(1046, 'sine', 0.15), 60);
         }
@@ -69,11 +74,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const sound = new SoundEngine();
 
+    // User interaction orqali AudioContext ni xavfsiz faollashtirish
+    const unlockAudio = () => {
+        sound.resume();
+        window.removeEventListener('pointerdown', unlockAudio);
+        window.removeEventListener('keydown', unlockAudio);
+    };
+    window.addEventListener('pointerdown', unlockAudio, { once: true, passive: true });
+    window.addEventListener('keydown', unlockAudio, { once: true, passive: true });
+
     // Sound Toggle Button Handler
     const soundToggle = document.getElementById('soundToggle');
     const soundIcon = document.getElementById('soundIcon');
     if (soundToggle && soundIcon) {
         soundToggle.addEventListener('click', () => {
+            sound.resume();
             const isEnabled = sound.toggle();
             soundIcon.textContent = isEnabled ? '🔊' : '🔇';
             if (isEnabled) sound.playChime();

@@ -16,12 +16,6 @@
     <!-- Advanced Cybersecurity & Protection Headers -->
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https:; media-src 'self' data:; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https:;">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="Permissions-Policy"
-        content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), display-capture=(), interest-cohort=()">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-
     <!-- Open Graph / Social Media -->
     <meta property="og:title" content="xudoyqulov.dev | Shaxsiy Portfolio">
     <meta property="og:description"
@@ -1114,7 +1108,7 @@
                                 <label for="userName" class="form-label">Ismingiz <span
                                         class="required">*</span></label>
                                 <input type="text" id="userName" name="name" class="form-input"
-                                    placeholder="Masalan: Sardor Aliyev" required>
+                                    placeholder="Masalan: Sardor Aliyev" autocomplete="name" required>
                                 <span class="form-error" id="nameError">Iltimos, ismingizni kiriting</span>
                             </div>
 
@@ -1122,7 +1116,7 @@
                                 <label for="userEmail" class="form-label">Email yoki Telefon raqamingiz <span
                                         class="required">*</span></label>
                                 <input type="text" id="userEmail" name="email" class="form-input"
-                                    placeholder="masalan@gmail.com yoki +998 90 123 45 67" required>
+                                    placeholder="masalan@gmail.com yoki +998 90 123 45 67" autocomplete="email" required>
                                 <span class="form-error" id="emailError">Iltimos, to'g'ri aloqa ma'lumotini
                                     kiriting</span>
                             </div>

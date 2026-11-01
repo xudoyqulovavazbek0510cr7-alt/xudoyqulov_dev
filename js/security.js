@@ -24,11 +24,11 @@
     // 2. CONSOLE CYBERSECURITY BANNER (Anti-Self-XSS)
     const consoleBadge = [
         '%c⚡ XUDOYQULOV.DEV XAVFSIZLIK TIZIMI FAOL ⚡',
-        'color: #00f0ff; background: #060911; font-size: 14px; font-weight: bold; padding: 6px 12px; border: 1px solid #00f0ff; border-radius: 4px;'
+        'color: #00f0ff; background: #060911; font-size: 13px; font-weight: bold; padding: 5px 10px; border: 1px solid #00f0ff; border-radius: 4px;'
     ];
     const consoleWarning = [
-        '%cOGOHLANTIRISH: Bu yerga begona yoki notanish skriptlarni nusxalab tashlamang (Self-XSS hujumi). Loyiha barcha so\'rovlar va kiritmalarni xavfsizlik nazoratidan o\'tkazadi.',
-        'color: #f43f5e; font-size: 11px; font-weight: 600;'
+        '%c🛡️ Himoya tizimi: Loyiha barcha so\'rovlar va kiritmalarni xavfsizlik nazoratidan o\'tkazadi.',
+        'color: #38bdf8; font-size: 11px; font-weight: 500;'
     ];
     console.log(...consoleBadge);
     console.log(...consoleWarning);
