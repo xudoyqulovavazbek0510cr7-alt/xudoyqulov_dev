@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-# Sitemap joylashuvi (Google qidiruv robotlari uchun)
-Sitemap: https://xudoyqulov.dev/sitemap.xml
