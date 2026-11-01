@@ -13,8 +13,13 @@
         content="xudoyqulov.dev, Avazbek Xudoyqulov, Xudoyqulov, Portfolio, Full-Stack dasturchi, Frontend, Backend, JavaScript, React, Node.js, Web dasturchi, O'zbekiston dasturchi">
     <meta name="author" content="Avazbek Xudoyqulov (xudoyqulov.dev)">
 
-    <!-- Security & Protection -->
+    <!-- Advanced Cybersecurity & Protection Headers -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https:; media-src 'self' data:; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https:;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Permissions-Policy"
+        content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), display-capture=(), interest-cohort=()">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <!-- Open Graph / Social Media -->
@@ -48,6 +53,9 @@
     <!-- Background Animated Canvas & Grid -->
     <canvas id="ambientCanvas" class="ambient-canvas"></canvas>
     <div class="ambient-grid"></div>
+
+    <!-- Fullscreen Cosmic Particle Convergence Canvas (Butun ekran bo'ylab zarrachalar) -->
+    <canvas id="starAssemblyCanvas" class="star-assembly-canvas" aria-hidden="true"></canvas>
 
     <!-- Page Preloader -->
     <div class="preloader" id="preloader">
@@ -175,14 +183,6 @@
                 <div class="hero-visual hero-visual-center">
                     <div class="avatar-card-container" id="avatarCardContainer">
 
-                        <!-- Interactive Assembly HUD Status Pill -->
-                        <div class="assembly-hud-pill" id="assemblyHudPill">
-                            <span class="hud-pulse-dot"></span>
-                            <span class="hud-status-text" id="hudStatusText">🧩 Bo'laklangan (Pastga suring)</span>
-                            <span class="hud-progress-num" id="hudProgressNum">0%</span>
-                            <button type="button" class="hud-toggle-btn" id="hudToggleBtn"
-                                title="Avtomatik yig'ish / bo'laklash">⚡ Yig'ish</button>
-                        </div>
 
                         <!-- Dynamic Aura & Floating Glow Rings -->
                         <div class="avatar-glow-ring ring-outer" id="glowRingOuter"></div>
@@ -209,10 +209,7 @@
                                 </div>
                             </div>
 
-                            <!-- 3D Shattered Shards Matrix Layer (Floating & Assembling on Scroll) -->
-                            <div class="shards-matrix-container" id="shardsMatrixContainer" aria-hidden="true">
-                                <!-- 16 shards generated dynamically by script.js -->
-                            </div>
+
 
                             <!-- Image Wrapper (Full Assembled Photo) -->
                             <div class="avatar-image-frame" id="avatarImageFrame">
@@ -1107,6 +1104,12 @@
                             <h3 class="form-title">Xabar Yuborish</h3>
                             <p class="form-desc">Formani to'ldiring, tez orada siz bilan bog'lanaman.</p>
 
+                            <!-- Cybersecurity Anti-Bot Honeypot Trap (Foydalanuvchilarga ko'rinmaydi) -->
+                            <div style="position: absolute; left: -9999px; top: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+                                <label for="contactHoneypot">Xavfsizlik tekshiruvi (to'ldirmang)</label>
+                                <input type="text" id="contactHoneypot" name="_contact_hp_check" tabindex="-1" autocomplete="off">
+                            </div>
+
                             <div class="form-group">
                                 <label for="userName" class="form-label">Ismingiz <span
                                         class="required">*</span></label>
@@ -1240,7 +1243,14 @@
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- Cybersecurity Core Shield (Eng yuqori xavfsizlik himoyasi) -->
+    <script src="js/security.js"></script>
+
+    <!-- React.js & ReactDOM (v18) -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <!-- Main Application Scripts -->
     <script src="js/script.js"></script>
 </body>
 

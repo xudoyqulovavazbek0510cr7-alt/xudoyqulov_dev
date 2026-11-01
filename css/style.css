@@ -199,7 +199,7 @@ img {
     background-image: 
         linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    z-index: 1;
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, black 40%, transparent 90%);
     mask-image: radial-gradient(circle at 50% 50%, black 40%, transparent 90%);
 }
 
@@ -238,7 +238,9 @@ img {
 .preloader-logo .name {
     background: var(--mood-gradient);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 
 .preloader-logo .slash {
@@ -398,7 +400,9 @@ img {
     margin: 0 0.15rem;
     background: linear-gradient(135deg, #ffffff 30%, var(--text-secondary) 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 
 .logo-dot {
@@ -688,67 +692,6 @@ img {
     position: relative;
 }
 
-.assembly-hud-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.45rem 1.15rem;
-    border-radius: var(--radius-full);
-    background: rgba(12, 18, 34, 0.88);
-    border: 1px solid var(--border-glow);
-    backdrop-filter: blur(14px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 15px var(--mood-glow-subtle);
-    margin-bottom: 1.25rem;
-    font-family: var(--font-code);
-    font-size: 0.84rem;
-    z-index: 25;
-    transition: all var(--transition-normal);
-}
-
-.hud-pulse-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--mood-primary);
-    box-shadow: 0 0 10px var(--mood-primary);
-    animation: beaconPulse 1.5s infinite;
-}
-
-.hud-status-text {
-    color: var(--text-secondary);
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.hud-progress-num {
-    color: #ffffff;
-    font-weight: 700;
-    background: rgba(255, 255, 255, 0.08);
-    padding: 0.15rem 0.55rem;
-    border-radius: var(--radius-sm);
-    min-width: 44px;
-    text-align: center;
-    font-size: 0.8rem;
-}
-
-.hud-toggle-btn {
-    background: var(--mood-gradient);
-    color: #ffffff;
-    border: none;
-    border-radius: var(--radius-full);
-    padding: 0.28rem 0.85rem;
-    font-size: 0.78rem;
-    font-weight: 700;
-    font-family: var(--font-body);
-    cursor: pointer;
-    box-shadow: 0 2px 10px var(--mood-glow);
-    transition: all var(--transition-fast);
-}
-
-.hud-toggle-btn:hover {
-    transform: scale(1.06);
-    box-shadow: 0 4px 16px var(--mood-glow-strong);
-}
 
 .hero-bottom-center {
     display: flex;
@@ -830,7 +773,9 @@ img {
 .name-gradient {
     background: var(--mood-gradient);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
+    color: transparent;
     filter: drop-shadow(0 4px 18px var(--mood-glow));
     transition: filter var(--transition-normal);
 }
@@ -1033,7 +978,6 @@ img {
 }
 
 /* 3D Tilting Card */
-/* 3D Tilting Card */
 .avatar-3d-card {
     position: relative;
     width: 100%;
@@ -1044,43 +988,19 @@ img {
     transform-style: preserve-3d;
 }
 
-/* 3D Shards Matrix Container */
-.shards-matrix-container {
-    position: absolute;
+/* Fullscreen Cosmic Particle Convergence Canvas (Butun ekran bo'ylab zarrachalar) */
+.star-assembly-canvas {
+    position: fixed;
     top: 0;
     left: 0;
-    width: 340px;
-    height: 420px;
+    width: 100vw;
+    height: 100vh;
     pointer-events: none;
-    z-index: 6;
-    transform-style: preserve-3d;
-    perspective: 1200px;
-    transition: opacity 0.3s ease;
-}
-
-/* Individual 3D Shard */
-.avatar-shard {
-    position: absolute;
-    width: 25%;
-    height: 25%;
-    border-radius: 6px;
+    z-index: 15;
     overflow: hidden;
-    background-repeat: no-repeat;
-    background-size: 400% 400%;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 15px var(--mood-glow);
-    border: 1px solid rgba(6, 182, 212, 0.55);
-    will-change: transform, opacity, box-shadow;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
 }
 
-.avatar-shard::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, transparent 60%);
-    pointer-events: none;
-}
+
 
 /* Shockwave Pulse when Assembled */
 .avatar-3d-card.assembled-pulse {
@@ -1140,16 +1060,7 @@ img {
 }
 
 .scanline-overlay {
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 3px,
-        rgba(0, 0, 0, 0.08) 4px
-    );
-    pointer-events: none;
-    z-index: 2;
+    display: none;
 }
 
 /* Live Online Status */
@@ -1517,7 +1428,9 @@ img {
 .text-accent {
     background: var(--mood-gradient);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 
 .about-text {
@@ -2702,10 +2615,7 @@ img {
         max-width: 290px;
     }
 
-    .shards-matrix-container {
-        width: 290px;
-        height: 360px;
-    }
+
 
     .principles-grid {
         grid-template-columns: 1fr;

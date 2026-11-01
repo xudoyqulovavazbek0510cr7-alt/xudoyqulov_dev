@@ -224,33 +224,50 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentVibeLabel = document.getElementById('currentVibeLabel');
     const avatarParticles = document.getElementById('avatarParticles');
 
-    function spawnEmotionBurst(emoji) {
+    function spawnEmotionBurst(emoji, mood) {
         if (!avatarParticles) return;
-        for (let i = 0; i < 7; i++) {
+        const currentMood = mood || document.documentElement.getAttribute('data-mood') || 'energetic';
+        const starSymbols = ['✦', '✨', '⭐', '★', '✧', '🌟'];
+        const starPalettes = {
+            energetic: ['#00f0ff', '#38bdf8', '#67e8f9', '#ffffff'],
+            passionate: ['#fbbf24', '#f59e0b', '#f97316', '#ffffff'],
+            creative: ['#c084fc', '#e879f9', '#a855f7', '#ffffff'],
+            focused: ['#34d399', '#10b981', '#6ee7b7', '#ffffff']
+        };
+        const activePalette = starPalettes[currentMood] || starPalettes.energetic;
+
+        for (let i = 0; i < 14; i++) {
             const particle = document.createElement('span');
-            particle.className = 'emotion-sparkle';
-            particle.textContent = emoji;
+            particle.className = 'emotion-sparkle star-sparkle';
+            const sym = starSymbols[i % starSymbols.length];
+            particle.textContent = sym;
             particle.style.position = 'absolute';
-            particle.style.left = `${45 + (Math.random() - 0.5) * 30}%`;
-            particle.style.top = `${50 + (Math.random() - 0.5) * 30}%`;
-            particle.style.fontSize = `${Math.random() * 1.2 + 1}rem`;
+            particle.style.left = `${48 + (Math.random() - 0.5) * 20}%`;
+            particle.style.top = `${50 + (Math.random() - 0.5) * 20}%`;
+            particle.style.fontSize = `${Math.random() * 1.1 + 0.9}rem`;
+            const color = activePalette[Math.floor(Math.random() * activePalette.length)];
+            particle.style.color = color;
+            particle.style.textShadow = `0 0 10px ${color}, 0 0 20px #ffffff`;
             particle.style.pointerEvents = 'none';
-            particle.style.zIndex = '30';
+            particle.style.zIndex = '35';
             particle.style.opacity = '1';
-            particle.style.transition = 'all 1s cubic-bezier(0.16, 1, 0.3, 1)';
+            particle.style.transition = 'all 1.1s cubic-bezier(0.16, 1, 0.3, 1)';
+            particle.style.transform = 'translate(0, 0) scale(0.5) rotate(0deg)';
 
             avatarParticles.appendChild(particle);
 
+            const angle = Math.random() * Math.PI * 2;
+            const distance = Math.random() * 130 + 60;
+            const rot = (Math.random() - 0.5) * 540;
+
             setTimeout(() => {
-                const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * 90 + 50;
-                particle.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance - 40}px) scale(0)`;
+                particle.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(${Math.random() * 0.7 + 0.6}) rotate(${rot}deg)`;
                 particle.style.opacity = '0';
             }, 20);
 
             setTimeout(() => {
                 if (particle.parentNode) particle.remove();
-            }, 1050);
+            }, 1150);
         }
     }
 
@@ -279,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentVibeIcon) currentVibeIcon.textContent = emoji;
         if (currentVibeLabel) currentVibeLabel.textContent = vibeLabel;
 
-        spawnEmotionBurst(emoji);
+        spawnEmotionBurst(emoji, mood);
         sound.playChime();
     }
 
@@ -328,75 +345,187 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /* ==========================================================================
-       7. SHATTERED PHOTO MATRIX & SCROLL-DRIVEN 3D ASSEMBLY SYSTEM
+       7. COSMIC PARTICLE CONVERGENCE SYSTEM (ZARRACHALARDAN HOSIL BO'LISH)
        ========================================================================== */
     const heroAvatarImg = document.getElementById('heroAvatarImg');
     const avatarFileInput = document.getElementById('avatarFileInput');
-    const shardsContainer = document.getElementById('shardsMatrixContainer');
-    const hudStatusText = document.getElementById('hudStatusText');
-    const hudProgressNum = document.getElementById('hudProgressNum');
-    const hudToggleBtn = document.getElementById('hudToggleBtn');
+    const starCanvas = document.getElementById('starAssemblyCanvas');
 
-    // 16 3D Shard configurations (4x4 Grid) with unique 3D scatter vectors
-    const shardConfigs = [
-        // Row 0 (Top row: flies up and outward)
-        { r: 0, c: 0, dx: -130, dy: -90, dz: 70, rx: 25, ry: -30, rz: -20 },
-        { r: 0, c: 1, dx: -45,  dy: -120, dz: 100, rx: 35, ry: -15, rz: -10 },
-        { r: 0, c: 2, dx: 45,   dy: -120, dz: 90, rx: 30, ry: 15,  rz: 12 },
-        { r: 0, c: 3, dx: 130,  dy: -90, dz: 80, rx: 25, ry: 30,  rz: 22 },
-
-        // Row 1 (Upper-mid row)
-        { r: 1, c: 0, dx: -140, dy: -25, dz: 50, rx: 15, ry: -35, rz: -15 },
-        { r: 1, c: 1, dx: -50,  dy: -35, dz: 120, rx: 20, ry: -10, rz: -8 },
-        { r: 1, c: 2, dx: 50,   dy: -35, dz: 130, rx: 20, ry: 10,  rz: 8 },
-        { r: 1, c: 3, dx: 140,  dy: -25, dz: 60, rx: 15, ry: 35,  rz: 16 },
-
-        // Row 2 (Lower-mid row)
-        { r: 2, c: 0, dx: -135, dy: 35,  dz: 60, rx: -15, ry: -30, rz: 14 },
-        { r: 2, c: 1, dx: -45,  dy: 40,  dz: 110, rx: -20, ry: -10, rz: 6 },
-        { r: 2, c: 2, dx: 45,   dy: 40,  dz: 120, rx: -20, ry: 10,  rz: -6 },
-        { r: 2, c: 3, dx: 135,  dy: 35,  dz: 55, rx: -15, ry: 30,  rz: -14 },
-
-        // Row 3 (Bottom row: flies down and outward)
-        { r: 3, c: 0, dx: -125, dy: 105, dz: 80, rx: -30, ry: -25, rz: 22 },
-        { r: 3, c: 1, dx: -40,  dy: 130, dz: 95, rx: -35, ry: -10, rz: 10 },
-        { r: 3, c: 2, dx: 40,   dy: 130, dz: 100, rx: -35, ry: 10,  rz: -10 },
-        { r: 3, c: 3, dx: 125,  dy: 105, dz: 75, rx: -30, ry: 25,  rz: -20 }
-    ];
-
-    let shardElements = [];
     let currentPhotoSrc = 'images/avazbek.jpg?v=' + Date.now();
 
-    // Load saved avatar if present in localStorage
-    const savedAvatarData = localStorage.getItem('avazbek_avatar_data');
-    if (savedAvatarData) {
-        currentPhotoSrc = savedAvatarData;
-    }
+    // Clear any previous stale cache to ensure newly uploaded portrait is always used
+    try {
+        localStorage.removeItem('avazbek_avatar_data');
+    } catch (e) {}
 
     if (heroAvatarImg) {
         heroAvatarImg.src = currentPhotoSrc;
     }
 
-    // Build the 16 3D shards inside #shardsMatrixContainer
-    if (shardsContainer) {
-        shardsContainer.innerHTML = '';
-        shardConfigs.forEach((cfg) => {
-            const shard = document.createElement('div');
-            shard.className = 'avatar-shard';
-            shard.style.left = `${cfg.c * 25}%`;
-            shard.style.top = `${cfg.r * 25}%`;
-            shard.style.backgroundImage = `url('${currentPhotoSrc}')`;
-            shard.style.backgroundPosition = `${cfg.c * 33.3333}% ${cfg.r * 33.3333}%`;
-            shardsContainer.appendChild(shard);
-            shardElements.push(shard);
-        });
+
+    /* ----------------------------------------------------------------------
+       FULLSCREEN COSMIC PARTICLE ENGINE (Butun Ekranda Zarrachalar)
+       ---------------------------------------------------------------------- */
+    let starParticles = [];
+    let starburstEffects = [];
+    let canvasW = window.innerWidth;
+    let canvasH = window.innerHeight;
+    let starCtx = null;
+
+    function resizeStarCanvas() {
+        if (!starCanvas || !starCtx) return;
+        canvasW = window.innerWidth;
+        canvasH = window.innerHeight;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        starCanvas.width = canvasW * dpr;
+        starCanvas.height = canvasH * dpr;
+        starCtx.setTransform(1, 0, 0, 1, 0, 0);
+        starCtx.scale(dpr, dpr);
+
+        // Update scatter points to span the full new screen dimensions
+        if (starParticles.length > 0) {
+            starParticles.forEach(p => {
+                p.scatterX = Math.random() * (canvasW + 160) - 80;
+                p.scatterY = Math.random() * (canvasH + 160) - 80;
+            });
+        }
+    }
+    window.addEventListener('resize', resizeStarCanvas);
+
+    const colorPalette = [
+        '#00f0ff', // electric cyan
+        '#ffd700', // radiant gold
+        '#c084fc', // cosmic purple
+        '#f43f5e', // ruby rose
+        '#10b981', // emerald green
+        '#fb923c', // amber orange
+        '#38bdf8', // sky cyan
+        '#e879f9', // neon magenta
+        '#34d399', // bright mint
+        '#ffffff'  // diamond white
+    ];
+
+    // High-performance GPU offscreen sprite cache (Zero shadowBlur lag, 60-120fps buttery smooth)
+    const dotSpriteCache = {};
+    function getDotSprite(color) {
+        if (dotSpriteCache[color]) return dotSpriteCache[color];
+        const off = document.createElement('canvas');
+        const size = 32;
+        off.width = size;
+        off.height = size;
+        const oCtx = off.getContext('2d');
+        const center = size / 2;
+
+        // Radial pinpoint glow
+        const grad = oCtx.createRadialGradient(center, center, 0, center, center, center);
+        grad.addColorStop(0, '#ffffff');
+        grad.addColorStop(0.25, '#ffffff');
+        grad.addColorStop(0.5, color);
+        grad.addColorStop(0.85, color);
+        grad.addColorStop(1, 'rgba(0,0,0,0)');
+
+        oCtx.fillStyle = grad;
+        oCtx.beginPath();
+        oCtx.arc(center, center, center, 0, Math.PI * 2);
+        oCtx.fill();
+
+        dotSpriteCache[color] = off;
+        return off;
     }
 
-    function updateAllShardsPhoto(src) {
-        currentPhotoSrc = src;
-        shardElements.forEach(shard => {
-            shard.style.backgroundImage = `url('${src}')`;
-        });
+    function initStarParticles() {
+        if (!starCanvas) return;
+        starCtx = starCanvas.getContext('2d');
+        resizeStarCanvas();
+
+        const cols = 28;
+        const rows = 40;
+        starParticles = [];
+
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                // Normalized coordinate across the photo frame (0.0 to 1.0)
+                const u = (c + 0.5) / cols;
+                const v = (r + 0.5) / rows;
+
+                // Full-screen scatter across the entire window
+                const scatterX = Math.random() * (canvasW + 160) - 80;
+                const scatterY = Math.random() * (canvasH + 160) - 80;
+
+                // Rich distinct colors for each tiny dot particle
+                const color = colorPalette[(r * 7 + c * 13) % colorPalette.length];
+
+                // Juda kichkina, nuqtadek radius (0.8px - 1.4px)
+                const radius = 0.8 + Math.random() * 0.6;
+                const sprite = getDotSprite(color);
+
+                starParticles.push({
+                    u,
+                    v,
+                    scatterX,
+                    scatterY,
+                    orbitRadius: 16 + Math.random() * 38,
+                    orbitSpeed: 0.025 + Math.random() * 0.045, // Tez va jonli harakat
+                    orbitPhase: Math.random() * Math.PI * 2,
+                    color,
+                    radius,
+                    sprite,
+                    twinkleSpeed: 0.06 + Math.random() * 0.1,
+                    twinklePhase: Math.random() * Math.PI * 2,
+                    trail: []
+                });
+            }
+        }
+    }
+
+    // Draw ultra-small pinpoint dot particle (Tez, yengil va qotmaydigan GPU blitting)
+    function drawDotParticle(ctx, x, y, radius, sprite, alpha) {
+        if (alpha <= 0.01) return;
+        ctx.globalAlpha = Math.min(1, Math.max(0, alpha));
+        const drawSize = radius * 4.6;
+        ctx.drawImage(sprite, x - drawSize * 0.5, y - drawSize * 0.5, drawSize, drawSize);
+    }
+
+    function ctxPointTrail(ctx, x, y, radius, sprite, alpha) {
+        if (alpha <= 0.01) return;
+        ctx.globalAlpha = Math.min(1, Math.max(0, alpha * 0.4));
+        const drawSize = radius * 2.6;
+        ctx.drawImage(sprite, x - drawSize * 0.5, y - drawSize * 0.5, drawSize, drawSize);
+    }
+
+    function spawnStarburstLock() {
+        const frameRect = avatarFrame ? avatarFrame.getBoundingClientRect() : null;
+        const targetW = frameRect ? frameRect.width : 340;
+        const targetH = frameRect ? frameRect.height : 420;
+        const targetLeft = frameRect ? frameRect.left : (canvasW - targetW) / 2;
+        const targetTop = frameRect ? frameRect.top : (canvasH - targetH) / 2;
+
+        for (let i = 0; i < 60; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const speed = 2.0 + Math.random() * 5.5;
+            const color = colorPalette[i % colorPalette.length];
+            starburstEffects.push({
+                x: targetLeft + Math.random() * targetW,
+                y: targetTop + Math.random() * targetH,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed,
+                life: 1.0,
+                decay: 0.024 + Math.random() * 0.026,
+                radius: 0.7 + Math.random() * 1.2,
+                color
+            });
+        }
+    }
+
+    function getMoodStarlightColor() {
+        const mood = document.documentElement.getAttribute('data-mood') || 'energetic';
+        switch (mood) {
+            case 'passionate': return '#fbbf24';
+            case 'creative':   return '#c084fc';
+            case 'focused':    return '#34d399';
+            case 'energetic':
+            default:           return '#00f0ff';
+        }
     }
 
     // Scroll-driven assembly variables
@@ -406,77 +535,113 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function getTargetProgress() {
         const sy = window.scrollY || window.pageYOffset || 0;
-        const assembleThreshold = 280; // pixels to fully lock together
+        const assembleThreshold = 180; // Tez va chaqqon yig'ilish masofasi
         return Math.min(1, Math.max(0, sy / assembleThreshold));
     }
 
-    function applyShardsTransform(t) {
+    function applyCosmicStarAssembly(t) {
         const invertT = 1 - t;
         const ease = invertT * invertT; // quadratic ease
-        const isMobile = window.innerWidth < 768;
-        const screenFactor = isMobile ? 0.52 : 1.0;
+        const time = performance.now() * 0.003;
+        const moodColor = getMoodStarlightColor();
 
-        shardElements.forEach((shard, index) => {
-            const cfg = shardConfigs[index];
-            if (!cfg) return;
+        // Screen bounding box of the avatar photo
+        const frameRect = avatarFrame ? avatarFrame.getBoundingClientRect() : null;
+        const targetW = frameRect ? frameRect.width : 340;
+        const targetH = frameRect ? frameRect.height : 420;
+        const targetLeft = frameRect ? frameRect.left : (canvasW - targetW) / 2;
+        const targetTop = frameRect ? frameRect.top : (canvasH - targetH) / 2;
 
-            const tx = cfg.dx * ease * screenFactor;
-            const ty = cfg.dy * ease * screenFactor;
-            const tz = cfg.dz * ease;
-            const rx = cfg.rx * ease;
-            const ry = cfg.ry * ease;
-            const rz = cfg.rz * ease;
-            const scale = 1 + (ease * 0.08);
+        // 1. Render Fullscreen Swarm of GPU-accelerated Pinpoint Dots (0 lag)
+        if (starCtx) {
+            starCtx.clearRect(0, 0, canvasW, canvasH);
 
-            shard.style.transform = `translate3d(${tx.toFixed(1)}px, ${ty.toFixed(1)}px, ${tz.toFixed(1)}px) rotateX(${rx.toFixed(1)}deg) rotateY(${ry.toFixed(1)}deg) rotateZ(${rz.toFixed(1)}deg) scale(${scale.toFixed(3)})`;
-            shard.style.borderColor = `rgba(6, 182, 212, ${(ease * 0.7).toFixed(2)})`;
-            shard.style.boxShadow = `0 ${(8 * ease + 2).toFixed(1)}px ${(22 * ease + 4).toFixed(1)}px rgba(0,0,0,0.65), 0 0 ${(16 * ease).toFixed(1)}px var(--mood-glow)`;
-        });
+            // Zarrachalar yig'ilib bo'lgach (t >= 0.96), ular rasm ustida mutlaqo ko'rinmaydi!
+            if (t < 0.96 && starParticles.length > 0) {
+                // Zarrachalar rasmga yaqinlashganda (t = 0.84 dan 0.96 gacha) silliq erib ketadi
+                const dotFade = t <= 0.84 ? 1.0 : Math.max(0, 1 - (t - 0.84) / 0.12);
 
-        // Smooth transition between shards and unified high-res photo
+                starParticles.forEach((p) => {
+                    // Target destination on the photo card
+                    const destX = targetLeft + p.u * targetW;
+                    const destY = targetTop + p.v * targetH;
+
+                    // Orbital hovering drift across the full screen when scattered
+                    const hoverX = Math.cos(time * p.orbitSpeed + p.orbitPhase) * p.orbitRadius * ease;
+                    const hoverY = Math.sin(time * p.orbitSpeed + p.orbitPhase) * p.orbitRadius * ease;
+
+                    // Interpolated position: from full-screen scatter to target photo
+                    const curX = destX + (p.scatterX - destX) * ease + hoverX;
+                    const curY = destY + (p.scatterY - destY) * ease + hoverY;
+
+                    const twinkle = 0.65 + 0.35 * Math.sin(time * p.twinkleSpeed + p.twinklePhase);
+                    let alpha = (0.8 + 0.2 * (1 - ease * 0.1)) * twinkle * dotFade;
+                    let curRadius = p.radius * (1 + ease * 0.1);
+
+                    // Streaming filament motion trail as dots fly from across the screen
+                    if (ease > 0.04 && ease < 0.94 && dotFade > 0.15) {
+                        p.trail.push({ x: curX, y: curY, alpha: alpha * 0.35 });
+                        if (p.trail.length > 3) p.trail.shift();
+
+                        p.trail.forEach((pt, idx) => {
+                            ctxPointTrail(starCtx, pt.x, pt.y, curRadius * (0.25 + idx * 0.15), p.sprite, pt.alpha * (idx / 3));
+                        });
+                    } else {
+                        p.trail = [];
+                    }
+
+                    if (alpha > 0.01) {
+                        drawDotParticle(starCtx, curX, curY, curRadius, p.sprite, alpha);
+                    }
+                });
+            }
+
+            // Render shockwave starburst sparks
+            for (let i = starburstEffects.length - 1; i >= 0; i--) {
+                const sp = starburstEffects[i];
+                sp.x += sp.vx;
+                sp.y += sp.vy;
+                sp.life -= sp.decay;
+
+                if (sp.life <= 0) {
+                    starburstEffects.splice(i, 1);
+                } else {
+                    const spSprite = getDotSprite(sp.color || '#ffffff');
+                    drawDotParticle(starCtx, sp.x, sp.y, sp.radius * sp.life, spSprite, sp.life);
+                }
+            }
+        }
+
+        // 2. Synthesize unified portrait ONLY AS particles arrive (t >= 0.84)
         if (avatarFrame) {
-            if (t >= 0.94) {
-                avatarFrame.style.opacity = ((t - 0.94) / 0.06).toFixed(2);
+            if (t >= 0.84) {
+                // Smooth lock-in when particles arrive
+                const revealProgress = Math.min(1, Math.max(0, (t - 0.84) / 0.12));
+                avatarFrame.style.opacity = revealProgress.toFixed(3);
+                avatarFrame.style.filter = `brightness(${(1 + (1 - revealProgress) * 0.2).toFixed(2)}) drop-shadow(0 0 ${(18 * (1 - revealProgress)).toFixed(0)}px ${moodColor})`;
             } else {
+                // Photo is completely hidden while particles are traveling!
                 avatarFrame.style.opacity = '0';
+                avatarFrame.style.filter = 'none';
             }
         }
 
-        if (shardsContainer) {
-            if (t >= 0.98) {
-                shardsContainer.style.opacity = (1 - (t - 0.98) / 0.02).toFixed(2);
-            } else {
-                shardsContainer.style.opacity = '1';
-            }
-        }
+        // Fade aura rings & floating badges in harmony with assembly
+        const ringOuter = document.getElementById('glowRingOuter');
+        const ringInner = document.getElementById('glowRingInner');
+        if (ringOuter) ringOuter.style.opacity = Math.max(0.06, t * t).toFixed(2);
+        if (ringInner) ringInner.style.opacity = Math.max(0.06, t * t).toFixed(2);
 
-        // HUD status text & progress pill
-        const percent = Math.round(t * 100);
-        if (hudProgressNum) {
-            hudProgressNum.textContent = percent + '%';
-        }
+        const badgeExp = document.getElementById('badgeExp');
+        const badgeQuality = document.getElementById('badgeQuality');
+        if (badgeExp) badgeExp.style.opacity = (0.15 + 0.85 * t).toFixed(2);
+        if (badgeQuality) badgeQuality.style.opacity = (0.15 + 0.85 * t).toFixed(2);
 
-        if (hudStatusText) {
-            if (t < 0.15) {
-                hudStatusText.textContent = "🧩 Bo'laklangan (Pastga suring)";
-                hudStatusText.style.color = "var(--text-secondary)";
-            } else if (t < 0.95) {
-                hudStatusText.textContent = `⚡ Yig'ilmoqda... (${percent}%)`;
-                hudStatusText.style.color = "var(--mood-primary)";
-            } else {
-                hudStatusText.textContent = "✨ Qiyofa to'liq yig'ildi!";
-                hudStatusText.style.color = "var(--accent-emerald)";
-            }
-        }
-
-        if (hudToggleBtn) {
-            hudToggleBtn.textContent = t > 0.5 ? "⚡ Bo'laklash" : "⚡ Yig'ish";
-        }
-
-        // Sound chime and subtle shockwave when full lock is achieved
+        // Sound chime and starburst shockwave on full synthesis
         if (t >= 0.98 && !isAssembledLocked) {
             isAssembledLocked = true;
             sound.playChime();
+            spawnStarburstLock();
             if (avatarCard) {
                 avatarCard.classList.add('assembled-pulse');
                 setTimeout(() => avatarCard.classList.remove('assembled-pulse'), 850);
@@ -486,32 +651,42 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Silky smooth 60fps spring lerp animation loop
+    // Initialize the star system
+    initStarParticles();
+
+    // Silky smooth 60-120fps spring lerp animation loop (Chaqqon va tezkor)
     function matrixRenderLoop() {
         targetProgress = getTargetProgress();
         const diff = targetProgress - currentProgress;
         if (Math.abs(diff) > 0.001) {
-            currentProgress += diff * 0.16;
+            currentProgress += diff * 0.26; // 60% tezroq va chaqqonroq javob beradi
         } else {
             currentProgress = targetProgress;
         }
 
-        applyShardsTransform(currentProgress);
+        applyCosmicStarAssembly(currentProgress);
         requestAnimationFrame(matrixRenderLoop);
     }
     matrixRenderLoop();
 
-    // Interactive button to toggle assemble / shatter
-    if (hudToggleBtn) {
-        hudToggleBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (currentProgress < 0.5) {
-                window.scrollTo({ top: 290, behavior: 'smooth' });
-            } else {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        });
-    }
+    // Interactive mouse stars trail anywhere on the screen
+    window.addEventListener('mousemove', (e) => {
+        if (Math.random() > 0.45 || !starCtx) return;
+        if (window.scrollY < window.innerHeight * 1.5) {
+            const angle = Math.random() * Math.PI * 2;
+            const speed = 1.2 + Math.random() * 2.8;
+            starburstEffects.push({
+                x: e.clientX,
+                y: e.clientY,
+                vx: Math.cos(angle) * speed,
+                vy: Math.sin(angle) * speed - 0.5,
+                life: 0.85,
+                decay: 0.035,
+                radius: 1.2 + Math.random() * 2.0,
+                color: colorPalette[Math.floor(Math.random() * colorPalette.length)]
+            });
+        }
+    });
 
     // User can click camera icon and choose their local photo directly
     if (avatarFileInput && heroAvatarImg) {
@@ -522,7 +697,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 reader.onload = (event) => {
                     const result = event.target.result;
                     heroAvatarImg.src = result;
-                    updateAllShardsPhoto(result);
                     try {
                         localStorage.setItem('avazbek_avatar_data', result);
                     } catch (err) {
@@ -1117,49 +1291,91 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
+            // 1. Cybersecurity Anti-Bot Trap (Honeypot)
+            const honeypot = document.getElementById('contactHoneypot');
+            if (honeypot && honeypot.value) {
+                console.warn('Bot faolligi aniqlandi va so\'rov bloklandi.');
+                return; // Botlar uchun so'rovni jimgina to'xtatish
+            }
+
+            // 2. Anti-Spam & DoS Rate Limiting (Token Bucket)
+            if (window.SecurityGuard && !window.SecurityGuard.rateLimiter.checkAllowed()) {
+                const cooldown = window.SecurityGuard.rateLimiter.getRemainingCooldown();
+                showToast(
+                    'Xavfsizlik Cheklovi (Anti-Spam)',
+                    `Iltimos, qayta yuborish uchun ${cooldown} soniya kuting.`,
+                    '⏳'
+                );
+                if (sound) sound.playBlip(250, 'sawtooth');
+                return;
+            }
+
             const nameInput = document.getElementById('userName');
             const emailInput = document.getElementById('userEmail');
             const messageInput = document.getElementById('userMessage');
+
+            let rawName = nameInput.value.trim();
+            let rawEmail = emailInput.value.trim();
+            let rawMessage = messageInput.value.trim();
 
             let isValid = true;
 
             // Reset errors
             document.querySelectorAll('.form-group').forEach(fg => fg.classList.remove('has-error'));
 
-            if (!nameInput.value.trim()) {
+            // 3. XSS & Code Injection Pattern Defense
+            if (window.SecurityGuard && (
+                window.SecurityGuard.detectSuspiciousPatterns(rawName) ||
+                window.SecurityGuard.detectSuspiciousPatterns(rawEmail) ||
+                window.SecurityGuard.detectSuspiciousPatterns(rawMessage)
+            )) {
+                showToast(
+                    'Xavfsizlik Xatosi',
+                    'Kiritilgan matnda taqiqlangan kod yoki shubhali belgilar aniqlandi!',
+                    '🛡️'
+                );
+                if (sound) sound.playBlip(200, 'sawtooth');
+                return;
+            }
+
+            if (!rawName) {
                 nameInput.closest('.form-group').classList.add('has-error');
                 isValid = false;
             }
 
-            if (!emailInput.value.trim() || emailInput.value.length < 5) {
+            if (!rawEmail || rawEmail.length < 5) {
                 emailInput.closest('.form-group').classList.add('has-error');
                 isValid = false;
             }
 
-            if (!messageInput.value.trim() || messageInput.value.length < 5) {
+            if (!rawMessage || rawMessage.length < 5) {
                 messageInput.closest('.form-group').classList.add('has-error');
                 isValid = false;
             }
 
             if (!isValid) {
-                sound.playBlip(300, 'sawtooth');
+                if (sound) sound.playBlip(300, 'sawtooth');
                 return;
             }
 
-            // Simulate form submission
+            // 4. Secure Sanitization of User Inputs
+            const safeName = window.SecurityGuard ? window.SecurityGuard.sanitizeText(rawName) : rawName;
+            const safeMessage = window.SecurityGuard ? window.SecurityGuard.sanitizeText(rawMessage) : rawMessage;
+
+            // Simulate form submission with protected feedback
             formSubmitBtn.classList.add('loading');
-            sound.playBlip(600);
+            if (sound) sound.playBlip(600);
 
             setTimeout(() => {
                 formSubmitBtn.classList.remove('loading');
                 contactForm.reset();
                 showToast(
                     'Katta Rahmat!',
-                    'Xabaringiz Avazbek Xudoyqulovga muvaffaqiyatli yetkazildi. Tez orada siz bilan bog\'lanaman!',
+                    `Hurmatli ${safeName}, xabaringiz Avazbek Xudoyqulovga xavfsiz yetkazildi. Tez orada siz bilan bog'lanaman!`,
                     '🚀'
                 );
-                sound.playChime();
-            }, 1200);
+                if (sound) sound.playChime();
+            }, 1000);
         });
     }
 

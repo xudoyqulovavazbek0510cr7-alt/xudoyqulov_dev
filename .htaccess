@@ -1,0 +1,57 @@
+# ==============================================================================
+# AVAZBEK PORTFOLIO — APACHE / CPANEL / LITESPEED SECURITY CONFIGURATION
+# Comprehensive hardening & defense rules
+# ==============================================================================
+
+# 1. Disable Directory Browsing (Prevent directory index leaking)
+Options -Indexes
+
+# 2. Block Access to Hidden & Sensitive Files (.git, .env, .htaccess, etc.)
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# 3. HTTP Security Headers
+<IfModule mod_headers.c>
+    # Enforce HSTS
+    Header set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" env=HTTPS
+    
+    # Prevent Clickjacking
+    Header set X-Frame-Options "DENY"
+    
+    # Block MIME Sniffing
+    Header set X-Content-Type-Options "nosniff"
+    
+    # Privacy Referrer Policy
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Hardware & Feature Permissions
+    Header set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
+    
+    # Cross-Origin Policies
+    Header set Cross-Origin-Opener-Policy "same-origin"
+    Header set Cross-Origin-Resource-Policy "same-origin"
+    
+    # Content Security Policy (CSP)
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https:; media-src 'self' data:; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https:;"
+</IfModule>
+
+# 4. Anti-Exploit / Injection Filter (Block path traversal & script query injection)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Block path traversal attempts (../ or ..\)
+    RewriteCond %{QUERY_STRING} (\.\./|\.\.\\) [NC,OR]
+    
+    # Block script tag injection in query string (<script>)
+    RewriteCond %{QUERY_STRING} (<|%3C).*script.*(>|%3E) [NC,OR]
+    
+    # Block base64 encoded PHP injection
+    RewriteCond %{QUERY_STRING} base64_encode.*\(.*\) [NC,OR]
+    
+    # Block GLOBALS and _REQUEST overwrites
+    RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [NC,OR]
+    RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2}) [NC]
+    RewriteRule ^(.*)$ - [F,L]
+</IfModule>

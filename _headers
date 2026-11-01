@@ -1,0 +1,27 @@
+# ==============================================================================
+# AVAZBEK PORTFOLIO — HIGH-SECURITY HEADERS (Netlify, Cloudflare Pages, Vercel)
+# Implemented with strict OWASP Top 10 defense guidelines
+# ==============================================================================
+
+/*
+  # Enforce HTTPS with Long-term HSTS Preload
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+
+  # Prevent Clickjacking (disallow embedding in iframes)
+  X-Frame-Options: DENY
+
+  # Prevent MIME-Type Sniffing
+  X-Content-Type-Options: nosniff
+
+  # Referrer Policy (Protect user navigation privacy)
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Restrict Dangerous Browser Features & Hardware APIs
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), display-capture=(), interest-cohort=()
+
+  # Cross-Origin Policies (Isolate browsing context)
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+
+  # Content Security Policy (Robust Defense against XSS & Injection)
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https:; media-src 'self' data:; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https:;
