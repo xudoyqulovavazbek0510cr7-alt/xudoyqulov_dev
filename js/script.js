@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ==========================================================================
        1. WEB AUDIO API SYNTHESIZER (Xavfsiz va engil mikrotovushlar)
        ========================================================================== */
+    let userHasInteracted = false;
+
     class SoundEngine {
         constructor() {
             this.ctx = null;
@@ -16,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         initOnGesture() {
-            if (this.initialized) return;
+            if (this.initialized || !userHasInteracted) return;
             try {
                 const AudioCtx = window.AudioContext || window.webkitAudioContext;
                 if (AudioCtx) {
@@ -29,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         resume() {
+            if (!userHasInteracted) return;
             this.initOnGesture();
             if (this.ctx && this.ctx.state === 'suspended') {
                 this.ctx.resume().catch(() => {});
@@ -36,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         playBlip(freq = 600, type = 'sine', duration = 0.08) {
-            if (!this.enabled) return;
+            if (!this.enabled || !userHasInteracted) return;
             this.resume();
             if (!this.ctx || this.ctx.state === 'suspended') return;
 
@@ -61,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         playChime() {
-            if (!this.enabled) return;
+            if (!this.enabled || !userHasInteracted) return;
             this.playBlip(784, 'sine', 0.12);
             setTimeout(() => this.playBlip(1046, 'sine', 0.15), 60);
         }
@@ -76,12 +79,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // User interaction orqali AudioContext ni xavfsiz faollashtirish
     const unlockAudio = () => {
-        sound.resume();
+        userHasInteracted = true;
+        sound.initOnGesture();
         window.removeEventListener('pointerdown', unlockAudio);
         window.removeEventListener('keydown', unlockAudio);
+        window.removeEventListener('touchstart', unlockAudio);
     };
     window.addEventListener('pointerdown', unlockAudio, { once: true, passive: true });
     window.addEventListener('keydown', unlockAudio, { once: true, passive: true });
+    window.addEventListener('touchstart', unlockAudio, { once: true, passive: true });
 
     // Sound Toggle Button Handler
     const soundToggle = document.getElementById('soundToggle');
@@ -964,7 +970,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentLangText = document.getElementById('currentLang');
     const langOptions = document.querySelectorAll('.lang-option');
 
-    function applyLanguage(lang) {
+    function applyLanguage(lang, playSound = false) {
         if (!translations[lang]) return;
         currentLangText.textContent = lang.toUpperCase();
 
@@ -984,7 +990,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         localStorage.setItem('avazbek_lang', lang);
-        sound.playBlip(700);
+        if (playSound && sound) {
+            sound.playBlip(700);
+        }
     }
 
     if (langBtn && langMenu) {
@@ -1000,7 +1008,7 @@ document.addEventListener('DOMContentLoaded', () => {
         langOptions.forEach(opt => {
             opt.addEventListener('click', () => {
                 const lang = opt.getAttribute('data-lang');
-                applyLanguage(lang);
+                applyLanguage(lang, true);
                 langMenu.classList.remove('show');
             });
         });
@@ -1008,7 +1016,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const savedLang = localStorage.getItem('avazbek_lang') || 'uz';
     if (savedLang !== 'uz') {
-        applyLanguage(savedLang);
+        applyLanguage(savedLang, false);
     }
 
 
